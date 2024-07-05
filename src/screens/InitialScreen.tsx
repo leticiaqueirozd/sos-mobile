@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 15,
     backgroundColor: '#F5F5F5',
   },
   bigText: {
@@ -52,16 +52,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#666',
   },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 30,
-  },
+
   button: {
     backgroundColor: '#11509D',
-    paddingVertical: 20,
-    paddingHorizontal: 100,
-    borderRadius: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 120,
+    borderRadius: 10,
     alignItems: 'center',
     marginBottom: 20,
   },
@@ -72,9 +68,9 @@ const styles = StyleSheet.create({
   buttonOutline: {
     borderColor: '#11509D',
     borderWidth: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 61,
-    borderRadius: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 85,
+    borderRadius: 10,
     alignItems: 'center',
   },
   buttonOutlineText: {

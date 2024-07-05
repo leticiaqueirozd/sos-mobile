@@ -98,17 +98,17 @@ export function HomeScreen() {
           style={styles.navButton}
           onPress={() => navigateToScreen('Home')}
         >
-          <Text style={styles.navText}>Home</Text>
+          <Text style={styles.navText}>Início</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigateToScreen('Contatos')}
+          onPress={() => navigateToScreen('Contact')}
         >
           <Text style={styles.navText}>Contatos</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigateToScreen('Denúncia')}
+          onPress={() => navigateToScreen('Report')}
         >
           <Text style={styles.navText}>Denúncia</Text>
         </TouchableOpacity>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 16,
-    paddingBottom: 100, // Add space for the navbar
+    paddingBottom: 100,
   },
   locationText: {
     fontSize: 20,

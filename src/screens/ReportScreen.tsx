@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, ScrollView, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const ReportScreen = () => {
@@ -29,23 +29,23 @@ export const ReportScreen = () => {
   };
 
   // Carregar os relatórios salvos ao carregar a tela
-  React.useEffect(() => {
+  useEffect(() => {
     loadReports();
   }, []);
 
   return (
-    <ScrollView style={{ padding: 20 }}>
-      <Text style={{ fontSize: 20, marginBottom: 10 }}>Formulário de Denúncia</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.heading}>Formulário de Denúncia</Text>
 
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+        style={styles.input}
         placeholder="Título da reclamação"
         value={title}
         onChangeText={text => setTitle(text)}
       />
 
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+        style={styles.input}
         placeholder="Endereço completo"
         value={address}
         onChangeText={text => setAddress(text)}
@@ -53,7 +53,7 @@ export const ReportScreen = () => {
 
       <TextInput
         multiline
-        style={{ height: 100, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+        style={[styles.input, { height: 100 }]}
         placeholder="Descrição do alerta"
         value={description}
         onChangeText={text => setDescription(text)}
@@ -62,16 +62,49 @@ export const ReportScreen = () => {
       <Button
         title="Enviar"
         onPress={handleSubmit}
+        color="#11509D"
       />
 
-      <Text style={{ fontSize: 20, marginTop: 20 }}>Histórico de Envios</Text>
+      <Text style={styles.heading}>Histórico de Envios</Text>
       {reports.map((report, index) => (
-        <View key={index} style={{ marginTop: 10, borderWidth: 1, padding: 10 }}>
-          <Text><Text style={{ fontWeight: 'bold' }}>Título:</Text> {report.title}</Text>
-          <Text><Text style={{ fontWeight: 'bold' }}>Endereço:</Text> {report.address}</Text>
-          <Text><Text style={{ fontWeight: 'bold' }}>Descrição:</Text> {report.description}</Text>
+        <View key={index} style={styles.reportContainer}>
+          <Text><Text style={styles.boldText}>Título:</Text> {report.title}</Text>
+          <Text><Text style={styles.boldText}>Endereço:</Text> {report.address}</Text>
+          <Text><Text style={styles.boldText}>Descrição:</Text> {report.description}</Text>
         </View>
       ))}
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFF',
+    padding: 20,
+  },
+  heading: {
+    fontSize: 20,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    color: '#11509D',
+  },
+  input: {
+    height: 40,
+    borderColor: '#E0E0E0',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    backgroundColor: '#F5F5F5',
+  },
+  reportContainer: {
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    padding: 10,
+    borderRadius: 10,
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
+});
