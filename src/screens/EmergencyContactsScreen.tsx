@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 
-export default function EmergencyContactsScreen() {
+export function EmergencyContactsScreen() {
   const contacts = [
     { name: 'Defesa Civil', phone: '199' },
     { name: 'Bombeiros', phone: '193' },
