@@ -7,13 +7,15 @@ import {InitialScreen} from '../screens/InitialScreen';
 import {LoginScreen} from '../screens/LoginScreen';
 import {RegisterScreen} from '../screens/RegisterScreen';
 import {HomeScreen} from '../screens/HomeScreen';
+import {EmergencyContactsScreen} from '../screens/EmergencyContactsScreen';
+
 
 export type RootStackParamList = {
-    SignIn: undefined;
-    Home: undefined;
-    EstablishmentDetails: undefined;
-    EventDetails: undefined;
-    MyEvents: undefined;
+    InitialScreen: undefined;
+    LoginScreen: undefined;
+    RegisterScreen: undefined;
+    HomeScreen: undefined;
+    EmergencyContactsScreen: undefined;
 }
 
 export function AppRoutes() {
@@ -23,6 +25,7 @@ export function AppRoutes() {
         <Screen name="Login" component={LoginScreen}  />
         <Screen name = "Register" component={RegisterScreen}></Screen>
         <Screen name = "Home" component={HomeScreen} ></Screen>
+        <Screen name = "Emergência" component={EmergencyContactsScreen} ></Screen>
 
     </Navigator>
   )

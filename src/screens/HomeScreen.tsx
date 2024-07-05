@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { RootStackParamList } from '../routes/app.routes';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+
+type HomeScreenNavigationProp = NavigationProp<RootStackParamList>;
 
 export function HomeScreen() {
-  const [selectedTab, setSelectedTab] = useState<string>('Home');
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const [selectedTab, setSelectedTab] = useState('Contatos');
+
+  const handleNavPress = (tab: string) => {
+    setSelectedTab(tab);
+    // Navegue para a tela correspondente, se necessário
+    // Exemplo:
+    // if (tab === 'Alertas') {
+    //   navigation.navigate('AlertasScreen');
+    // }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Text style={styles.locationText}>
           Você está localizado em:
@@ -40,7 +54,18 @@ export function HomeScreen() {
           {/* Adicione mais alertas conforme necessário */}
         </View>
       </ScrollView>
-    </SafeAreaView>
+      <View style={styles.navbar}>
+        <TouchableOpacity style={styles.navButton} onPress={() => handleNavPress('Alertas')}>
+          <Text style={[styles.navText, selectedTab === 'Alertas' && styles.navTextSelected]}>Alertas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navButton} onPress={() => handleNavPress('Contatos')}>
+          <Text style={[styles.navText, selectedTab === 'Contatos' && styles.navTextSelected]}>Contatos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navButton} onPress={() => handleNavPress('Ajustes')}>
+          <Text style={[styles.navText, selectedTab === 'Ajustes' && styles.navTextSelected]}>Ajustes</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
