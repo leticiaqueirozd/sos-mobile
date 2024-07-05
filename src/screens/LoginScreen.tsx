@@ -15,10 +15,10 @@ export function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require('../../assets/icon.png')} // Substitua pelo caminho da sua imagem
         style={styles.image}
-      />
+      /> */}
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   },
-  image: {
-    width: 100,
-    height: 136,
-    marginBottom: 40,
-  },
+  // image: {
+  //   width: 100,
+  //   height: 136,
+  //   marginBottom: 40,
+  // },
   title: {
     fontSize: 24,
     marginBottom: 20,
@@ -65,20 +65,20 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   input: {
-    height: 65,
+    height: 55,
     width: '100%',
     borderColor: '#F2F2F3',
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: 10,
     marginBottom: 20,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
     backgroundColor: '#F2F2F3',
   },
   button: {
     backgroundColor: '#11509D',
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 100,
-    borderRadius: 15,
+    borderRadius: 10,
   },
   buttonText: {
     color: '#FFF',
