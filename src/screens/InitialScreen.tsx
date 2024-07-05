@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function InicioScreen({ navigation }) {
+export function InitialScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bem-vindo ao SOS Inundação</Text>
