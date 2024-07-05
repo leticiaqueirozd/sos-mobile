@@ -1,16 +1,26 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 export function InitialScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bem-vindo ao SOS Inundação</Text>
+      {/* Frase maior */}
+      <Text style={styles.bigText}>Inundações previstas, vidas protegidas.</Text>
+      {/* Frase menor */}
+      <Text style={styles.smallText}>Sua comunidade protegida através de alertas rápidos e eficazes.</Text>
+      
+      {/* Logo */}
+      {/* <Image source={logo} style={styles.logo} /> */}
+
+      {/* Botão Entrar */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Login')}
       >
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
+
+      {/* Botão Criar nova conta */}
       <TouchableOpacity
         style={styles.buttonOutline}
         onPress={() => navigation.navigate('Register')}
@@ -25,36 +35,50 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
     backgroundColor: '#F5F5F5',
   },
-  title: {
-    fontSize: 24,
+  bigText: {
+    fontSize: 20,
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#11509D',
+  },
+  smallText: {
+    fontSize: 16,
+    width: '75%',
     marginBottom: 20,
     textAlign: 'center',
-    color: '#000',
+    color: '#666',
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 30,
   },
   button: {
-    backgroundColor: '#1E88E5',
-    padding: 15,
-    borderRadius: 8,
+    backgroundColor: '#11509D',
+    paddingVertical: 20,
+    paddingHorizontal: 100,
+    borderRadius: 15,
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   buttonText: {
     color: '#FFF',
     fontSize: 16,
   },
   buttonOutline: {
-    borderColor: '#1E88E5',
+    borderColor: '#11509D',
     borderWidth: 1,
-    padding: 15,
-    borderRadius: 8,
+    paddingVertical: 20,
+    paddingHorizontal: 61,
+    borderRadius: 15,
     alignItems: 'center',
   },
   buttonOutlineText: {
-    color: '#1E88E5',
+    color: '#11509D',
     fontSize: 16,
   },
 });
-   

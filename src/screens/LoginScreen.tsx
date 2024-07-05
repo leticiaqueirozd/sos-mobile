@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 export function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -15,7 +15,10 @@ export function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Image
+        source={require('../../assets/icon.png')} // Substitua pelo caminho da sua imagem
+        style={styles.image}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -32,7 +35,12 @@ export function LoginScreen({ navigation }) {
         secureTextEntry
         autoCapitalize="none"
       />
-      <Button title="Login" onPress={handleLogin} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin}
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -41,8 +49,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#fff',
+  },
+  image: {
+    width: 100,
+    height: 136,
+    marginBottom: 40,
   },
   title: {
     fontSize: 24,
@@ -51,17 +65,24 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   input: {
-    height: 50,
-    borderColor: '#E0E0E0',
+    height: 65,
+    width: '100%',
+    borderColor: '#F2F2F3',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 15,
     marginBottom: 20,
-    paddingHorizontal: 10,
-    backgroundColor: '#FAFAFA',
+    paddingHorizontal: 15,
+    backgroundColor: '#F2F2F3',
   },
-  forgotPassword: {
-    marginTop: 20,
+  button: {
+    backgroundColor: '#11509D',
+    paddingVertical: 20,
+    paddingHorizontal: 100,
+    borderRadius: 15,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
     textAlign: 'center',
-    color: '#1E88E5',
   },
 });
