@@ -102,13 +102,13 @@ export function HomeScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigateToScreen('Contatos')}
+          onPress={() => navigateToScreen('Contact')}
         >
           <Text style={styles.navText}>Contatos</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigateToScreen('Denúncia')}
+          onPress={() => navigateToScreen('Report')}
         >
           <Text style={styles.navText}>Denúncia</Text>
         </TouchableOpacity>

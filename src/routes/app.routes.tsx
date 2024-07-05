@@ -26,11 +26,11 @@ export function AppRoutes() {
   return(
     <Navigator screenOptions={{ header: (props) => <Header {...props} />}} >       
         <Screen name="Inicio" component={InitialScreen} options={{ headerShown: false }} />
-        <Screen name="Login" component={LoginScreen}  />
-        <Screen name = "Register" component={RegisterScreen}></Screen>
-        <Screen name = "Home" component={HomeScreen} ></Screen>
-        <Screen name = "Contact" component={ContactScreen} ></Screen>
-        <Screen name = "Report" component={ReportScreen} ></Screen>
+        <Screen name="Login" component={LoginScreen} options={{ title: 'Entrar' }}/>
+        <Screen name = "Register" component={RegisterScreen} options={{ title: 'Criar Conta' }}></Screen>
+        <Screen name = "Home" component={HomeScreen} options={{ title: 'Inicío' }}></Screen>
+        <Screen name = "Contact" component={ContactScreen} options={{ title: 'Contatos' }}></Screen>
+        <Screen name = "Report" component={ReportScreen} options={{ title: 'Denúncia' }}></Screen>
     </Navigator>
   )
 }
