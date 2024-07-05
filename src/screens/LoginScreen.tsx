@@ -6,7 +6,7 @@ export function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    if (email === 'lele' && password === 'junin') {
+    if (email === 'admin@admin' && password === 'admin') {
       navigation.navigate('Home');
     } else {
       alert('Email ou senha incorretos');
@@ -16,8 +16,7 @@ export function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/image.png')} // Substitua pelo caminho da sua imagem
-        style={styles.image}
+        source={require('../../assets/image.png')}
       />
       <TextInput
         style={styles.input}

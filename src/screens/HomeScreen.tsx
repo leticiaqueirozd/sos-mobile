@@ -15,9 +15,8 @@ export function HomeScreen() {
         const data = await response.json();
         setWeatherData(data);
 
-        // Verificar se há alerta vermelho e salvar localmente
         if (data.alert === 'Vermelho' || data.alert === 'Amarelo') {
-          saveRedAlert('Boa Viagem', data); // Salvando localmente no aplicativo
+          saveRedAlert('Boa Viagem', data); 
         }
       } else {
         console.error('Erro ao buscar dados meteorológicos:', response.status);
@@ -27,17 +26,14 @@ export function HomeScreen() {
     }
   };
 
-  // Função para salvar alerta vermelho localmente
   const saveRedAlert = (location: string, details: any) => {
     const newAlert = { location, details, timestamp: new Date() };
     setRedAlerts(prevAlerts => [...prevAlerts, newAlert]);
   };
 
   useEffect(() => {
-    // Buscar dados meteorológicos inicialmente
     fetchWeatherData();
 
-    // Atualizar dados a cada minuto
     const interval = setInterval(fetchWeatherData, 60 * 1000);
     return () => clearInterval(interval);
   }, []);
@@ -94,7 +90,6 @@ export function HomeScreen() {
           ))}
         </View>
       </ScrollView>
-      {/* Barra de navegação no final da página */}
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navButton}
