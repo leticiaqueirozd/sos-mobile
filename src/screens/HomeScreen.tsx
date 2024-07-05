@@ -74,13 +74,16 @@ export function HomeScreen() {
           </View>
         </View>
         <Text style={styles.historyTitle}>
-          Histórico de Alertas Vermelhos
+          Histórico de Alertas
         </Text>
         <View style={styles.historyContainer}>
           {redAlerts.map((alert, index) => (
-            <View key={index} style={styles.alertItem}>
+            <View key={index} style={[styles.alertItem, alert.details.alert === 'Vermelho' ? styles.redBackground : styles.yellowBackground]}>
               <Text style={styles.alertText}>
-                Alerta: {alert.details.alert}
+                {alert.details.alert === 'Vermelho' ? 'Alerta Vermelho' : 'Alerta Amarelo'}
+              </Text>
+              <Text style={styles.alertText}>
+                Local: {alert.location}
               </Text>
               <Text style={styles.alertText}>
                 Data e Hora: {alert.timestamp.toLocaleString()}
@@ -99,15 +102,15 @@ export function HomeScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigateToScreen('Contact')}
+          onPress={() => navigateToScreen('Contatos')}
         >
           <Text style={styles.navText}>Contatos</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigateToScreen('Report')}
+          onPress={() => navigateToScreen('Denúncia')}
         >
-          <Text style={styles.navText}>Denuncia</Text>
+          <Text style={styles.navText}>Denúncia</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -168,11 +171,16 @@ const styles = StyleSheet.create({
   alertItem: {
     marginBottom: 10,
     padding: 10,
-    backgroundColor: '#ffa0a0',
     borderRadius: 8,
   },
   alertText: {
     fontSize: 16,
+  },
+  redBackground: {
+    backgroundColor: '#ffa0a0', // Vermelho
+  },
+  yellowBackground: {
+    backgroundColor: '#fffacd', // Amarelo
   },
   navbar: {
     position: 'absolute',
