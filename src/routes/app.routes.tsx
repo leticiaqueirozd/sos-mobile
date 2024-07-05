@@ -8,6 +8,8 @@ import {LoginScreen} from '../screens/LoginScreen';
 import {RegisterScreen} from '../screens/RegisterScreen';
 import {HomeScreen} from '../screens/HomeScreen';
 // import {EmergencyContactsScreen} from '../screens/EmergencyContactsScreen';
+import {ContactScreen} from '../screens/ContactScreen';
+import {ReportScreen} from '../screens/ReportScreen';
 
 
 export type RootStackParamList = {
@@ -15,7 +17,9 @@ export type RootStackParamList = {
     LoginScreen: undefined;
     RegisterScreen: undefined;
     HomeScreen: undefined;
-    EmergencyContactsScreen: undefined;
+    ContactScreen: undefined;
+    ReportScreen: undefined;  
+
 }
 
 export function AppRoutes() {
@@ -25,8 +29,8 @@ export function AppRoutes() {
         <Screen name="Login" component={LoginScreen}  />
         <Screen name = "Register" component={RegisterScreen}></Screen>
         <Screen name = "Home" component={HomeScreen} ></Screen>
-        {/* <Screen name = "Emergência" component={EmergencyContactsScreen} ></Screen> */}
-
+        <Screen name = "Contact" component={ContactScreen} ></Screen>
+        <Screen name = "Report" component={ReportScreen} ></Screen>
     </Navigator>
   )
 }
