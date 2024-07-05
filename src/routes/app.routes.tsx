@@ -7,9 +7,9 @@ import {InitialScreen} from '../screens/InitialScreen';
 import {LoginScreen} from '../screens/LoginScreen';
 import {RegisterScreen} from '../screens/RegisterScreen';
 import {HomeScreen} from '../screens/HomeScreen';
-// import {EmergencyContactsScreen} from '../screens/EmergencyContactsScreen';
 import {ContactScreen} from '../screens/ContactScreen';
 import {ReportScreen} from '../screens/ReportScreen';
+import { DonationScreen } from '../screens/DonationScreen';
 
 
 export type RootStackParamList = {
@@ -19,6 +19,7 @@ export type RootStackParamList = {
     HomeScreen: undefined;
     ContactScreen: undefined;
     ReportScreen: undefined;  
+    DonationScreen: undefined;  
 
 }
 
@@ -28,9 +29,10 @@ export function AppRoutes() {
         <Screen name="Inicio" component={InitialScreen} options={{ headerShown: false }} />
         <Screen name="Login" component={LoginScreen} options={{ title: 'Entrar' }}/>
         <Screen name = "Register" component={RegisterScreen} options={{ title: 'Criar Conta' }}></Screen>
-        <Screen name = "Home" component={HomeScreen} options={{ title: 'Inicío' }}></Screen>
+        <Screen name = "Home" component={HomeScreen} options={{ title: 'Início' }}></Screen>
         <Screen name = "Contact" component={ContactScreen} options={{ title: 'Contatos' }}></Screen>
         <Screen name = "Report" component={ReportScreen} options={{ title: 'Denúncia' }}></Screen>
+        <Screen name = "Donation" component={DonationScreen} options={{ title: 'Doação' }}></Screen>
     </Navigator>
   )
 }

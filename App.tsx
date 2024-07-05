@@ -23,7 +23,7 @@ export default function App() {
 
   const fetchWeatherData = async () => {
     try {
-      const response = await fetch('http://192.168.15.37:3001/weather/Boa%20Viagem');
+      const response = await fetch('http://10.100.1.85:3001/weather/Boa%20Viagem');
       if (response.ok) {
         const data = await response.json();
         setWeatherData(data);

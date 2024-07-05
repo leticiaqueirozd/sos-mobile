@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TextInput, ScrollView, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const ReportScreen = () => {
   const [title, setTitle] = useState('');
@@ -9,13 +10,11 @@ export const ReportScreen = () => {
   const [reports, setReports] = useState([]);
 
   const handleSubmit = async () => {
-    // Salvar a denúncia localmente (exemplo usando AsyncStorage)
     const newReport = { title, address, description };
     const updatedReports = [...reports, newReport];
     await AsyncStorage.setItem('reports', JSON.stringify(updatedReports));
     setReports(updatedReports);
 
-    // Limpar campos do formulário após enviar
     setTitle('');
     setAddress('');
     setDescription('');
@@ -28,7 +27,11 @@ export const ReportScreen = () => {
     }
   };
 
-  // Carregar os relatórios salvos ao carregar a tela
+  const clearReports = async () => {
+    await AsyncStorage.removeItem('reports');
+    setReports([]);
+  };
+
   useEffect(() => {
     loadReports();
   }, []);
@@ -39,31 +42,32 @@ export const ReportScreen = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Título da reclamação"
+        placeholder="Título da Reclamação"
         value={title}
         onChangeText={text => setTitle(text)}
       />
 
       <TextInput
         style={styles.input}
-        placeholder="Endereço completo"
+        placeholder="Endereço Completo"
         value={address}
         onChangeText={text => setAddress(text)}
       />
 
       <TextInput
         multiline
-        style={[styles.input, { height: 100 }]}
-        placeholder="Descrição do alerta"
+        style={[styles.input, styles.textArea]}
+        placeholder="Descrição do Alerta"
         value={description}
         onChangeText={text => setDescription(text)}
       />
 
-      <Button
-        title="Enviar"
+      <TouchableOpacity
         onPress={handleSubmit}
-        color="#11509D"
-      />
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Enviar</Text>
+      </TouchableOpacity>
 
       <Text style={styles.heading}>Histórico de Envios</Text>
       {reports.map((report, index) => (
@@ -73,6 +77,15 @@ export const ReportScreen = () => {
           <Text><Text style={styles.boldText}>Descrição:</Text> {report.description}</Text>
         </View>
       ))}
+
+      {reports.length > 0 && (
+        <TouchableOpacity
+          onPress={clearReports}
+          style={[styles.button, styles.clearButton]}
+        >
+          <Text style={styles.buttonText}>Limpar Histórico</Text>
+        </TouchableOpacity>
+      )}
     </ScrollView>
   );
 };
@@ -83,10 +96,12 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   heading: {
-    fontSize: 20,
+    marginTop: 30,
+    fontSize: 24,
     marginBottom: 10,
     fontWeight: 'bold',
     color: '#11509D',
+    textAlign: 'center',
   },
   input: {
     height: 40,
@@ -97,14 +112,42 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: '#F5F5F5',
   },
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top', // Para alinhar o texto no topo da caixa de texto
+  },
+  button: {
+    borderRadius: 10, // Bordas redondas no botão
+    overflow: 'hidden', // Garante que as bordas redondas funcionem corretamente
+    backgroundColor: '#11509D',
+    paddingVertical: 15,
+    paddingHorizontal: 100,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  clearButton: {
+    marginTop: 10,
+    backgroundColor: '#11509D', // Cor vermelha para o botão de limpar
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
+    textAlign: 'center',
+  },
   reportContainer: {
     marginTop: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
     padding: 10,
     borderRadius: 10,
+    backgroundColor: '#FAFAFA',
   },
   boldText: {
     fontWeight: 'bold',
+    color: '#333',
   },
 });
+
+export default ReportScreen;

@@ -15,10 +15,10 @@ export function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <Image
-        source={require('../../assets/icon.png')} // Substitua pelo caminho da sua imagem
+      <Image
+        source={require('../../assets/image.png')} // Substitua pelo caminho da sua imagem
         style={styles.image}
-      /> */}
+      />
       <TextInput
         style={styles.input}
         placeholder="E-mail"
@@ -39,7 +39,7 @@ export function LoginScreen({ navigation }) {
         style={styles.button}
         onPress={handleLogin}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -53,11 +53,12 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   },
-  // image: {
-  //   width: 100,
-  //   height: 136,
-  //   marginBottom: 40,
-  // },
+  image: {
+    width: 120,
+    height: 170,
+    marginTop: -100,
+    marginBottom: 20,
+  },
   title: {
     fontSize: 24,
     marginBottom: 20,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     backgroundColor: '#F2F2F3',
   },
   button: {

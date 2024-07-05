@@ -10,7 +10,7 @@ export function HomeScreen() {
 
   const fetchWeatherData = async () => {
     try {
-      const response = await fetch('http://192.168.15.37:3001/weather/Boa%20Viagem');
+      const response = await fetch('http://10.100.1.85:3001/weather/Boa%20Viagem');
       if (response.ok) {
         const data = await response.json();
         setWeatherData(data);
@@ -62,14 +62,16 @@ export function HomeScreen() {
           {weatherData.temperature}°C
         </Text>
         <View style={styles.infoContainer}>
-          <View style={styles.infoBox}>
+          <View style={[styles.infoBox, styles.infoBoxLeft]}>
+            <Text style={[styles.infoText, styles.infoLabelText]}>Umidade</Text>
             <Text style={styles.infoText}>
-              Umidade: {weatherData.humidity}%
+              {weatherData.humidity}%
             </Text>
           </View>
-          <View style={styles.infoBox}>
+          <View style={[styles.infoBox, styles.infoBoxRight]}>
+            <Text style={[styles.infoText, styles.infoLabelText]}>Precipitação</Text>
             <Text style={styles.infoText}>
-              Precipitação: {weatherData.precipitation}mm
+              {weatherData.precipitation}mm
             </Text>
           </View>
         </View>
@@ -96,21 +98,21 @@ export function HomeScreen() {
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigateToScreen('Home')}
-        >
-          <Text style={styles.navText}>Início</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.navButton}
           onPress={() => navigateToScreen('Contact')}
         >
-          <Text style={styles.navText}>Contatos</Text>
+          <Text style={styles.navText}>Emergência</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
           onPress={() => navigateToScreen('Report')}
         >
           <Text style={styles.navText}>Denúncia</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.navButton}
+          onPress={() => navigateToScreen('Donation')}
+        >
+          <Text style={styles.navText}>Doação</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -129,19 +131,23 @@ const styles = StyleSheet.create({
   locationText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#11509D', // Cor estratégica
   },
   location: {
     fontSize: 18,
     marginBottom: 20,
+    color: '#333', // Cor padrão
   },
   currentTempText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#11509D', // Cor estratégica
   },
   currentTemp: {
     fontSize: 48,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#333', // Cor padrão
   },
   infoContainer: {
     flexDirection: 'row',
@@ -155,13 +161,26 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
   },
+  infoBoxLeft: {
+    marginRight: '2%',
+  },
+  infoBoxRight: {
+    marginLeft: '2%',
+  },
   infoText: {
     fontSize: 16,
+    color: '#333', // Cor padrão
+  },
+  infoLabelText: {
+    fontWeight: 'bold',
+    marginBottom: 4,
+    color: '#11509D', // Cor estratégica
   },
   historyTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#11509D', // Cor estratégica
   },
   historyContainer: {
     padding: 10,
@@ -175,6 +194,7 @@ const styles = StyleSheet.create({
   },
   alertText: {
     fontSize: 16,
+    color: '#333', // Cor padrão
   },
   redBackground: {
     backgroundColor: '#ffa0a0', // Vermelho
@@ -187,12 +207,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 50,
+    height: 60,
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#f0f0f0',
-    borderTopWidth: 1,
-    borderColor: '#ccc',
+    borderTopWidth: 2,
+    borderColor: '#11509D',
   },
   navButton: {
     flex: 1,
@@ -201,6 +221,8 @@ const styles = StyleSheet.create({
   },
   navText: {
     fontSize: 16,
+    color: '#11509D', // Cor estratégica
+    fontWeight: '900',
   },
 });
 
