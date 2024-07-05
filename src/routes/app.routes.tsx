@@ -3,8 +3,6 @@ import { Header, createStackNavigator } from '@react-navigation/stack';
 
 const { Navigator, Screen } = createStackNavigator();
 
-
-import {SplashScreen} from '../screens/SplashScreen';
 import {InitialScreen} from '../screens/InitialScreen';
 import {LoginScreen} from '../screens/LoginScreen';
 import {RegisterScreen} from '../screens/RegisterScreen';
@@ -21,8 +19,7 @@ export type RootStackParamList = {
 export function AppRoutes() {
   return(
     <Navigator screenOptions={{ header: (props) => <Header {...props} />}} >       
-        <Screen name="Splash" component={SplashScreen} options={{ headerShown: false }}/>
-        <Screen name="Inicio" component={InitialScreen}  />
+        <Screen name="Inicio" component={InitialScreen} options={{ headerShown: false }} />
         <Screen name="Login" component={LoginScreen}  />
         <Screen name = "Register" component={RegisterScreen}></Screen>
         <Screen name = "Home" component={HomeScreen} ></Screen>
