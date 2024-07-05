@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export function HomeScreen() {
-
+  const navigation = useNavigation();
 
   const [weatherData, setWeatherData] = useState<any>({});
+  const [redAlerts, setRedAlerts] = useState<any[]>([]); // Estado para armazenar alertas vermelhos
 
   const fetchWeatherData = async () => {
     try {
@@ -12,12 +14,23 @@ export function HomeScreen() {
       if (response.ok) {
         const data = await response.json();
         setWeatherData(data);
+
+        // Verificar se há alerta vermelho e salvar localmente
+        if (data.alert === 'Vermelho' || data.alert === 'Amarelo') {
+          saveRedAlert('Boa Viagem', data); // Salvando localmente no aplicativo
+        }
       } else {
         console.error('Erro ao buscar dados meteorológicos:', response.status);
       }
     } catch (error) {
       console.error('Erro ao buscar dados meteorológicos:', error);
     }
+  };
+
+  // Função para salvar alerta vermelho localmente
+  const saveRedAlert = (location: string, details: any) => {
+    const newAlert = { location, details, timestamp: new Date() };
+    setRedAlerts(prevAlerts => [...prevAlerts, newAlert]);
   };
 
   useEffect(() => {
@@ -29,6 +42,9 @@ export function HomeScreen() {
     return () => clearInterval(interval);
   }, []);
 
+  const navigateToScreen = (screenName: string) => {
+    navigation.navigate(screenName);
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +53,7 @@ export function HomeScreen() {
           Você está localizado em:
         </Text>
         <Text style={styles.location}>
-          Recife, Pernembuco
+          Recife, Pernambuco
         </Text>
         <Text style={styles.currentTempText}>
           Temperatura Atual
@@ -61,11 +77,39 @@ export function HomeScreen() {
           Histórico de Alertas Vermelhos
         </Text>
         <View style={styles.historyContainer}>
-          <Text style={styles.historyText}>Alerta 1: Data e hora</Text>
-          <Text style={styles.historyText}>Alerta 2: Data e hora</Text>
-          {/* Adicione mais alertas conforme necessário */}
+          {redAlerts.map((alert, index) => (
+            <View key={index} style={styles.alertItem}>
+              <Text style={styles.alertText}>
+                Alerta: {alert.details.alert}
+              </Text>
+              <Text style={styles.alertText}>
+                Data e Hora: {alert.timestamp.toLocaleString()}
+              </Text>
+            </View>
+          ))}
         </View>
       </ScrollView>
+      {/* Barra de navegação no final da página */}
+      <View style={styles.navbar}>
+        <TouchableOpacity
+          style={styles.navButton}
+          onPress={() => navigateToScreen('Home')}
+        >
+          <Text style={styles.navText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.navButton}
+          onPress={() => navigateToScreen('Contact')}
+        >
+          <Text style={styles.navText}>Contatos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.navButton}
+          onPress={() => navigateToScreen('Report')}
+        >
+          <Text style={styles.navText}>Denuncia</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -121,9 +165,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     borderRadius: 8,
   },
-  historyText: {
+  alertItem: {
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#ffa0a0',
+    borderRadius: 8,
+  },
+  alertText: {
     fontSize: 16,
-    marginBottom: 5,
   },
   navbar: {
     position: 'absolute',
@@ -145,8 +194,6 @@ const styles = StyleSheet.create({
   navText: {
     fontSize: 16,
   },
-  navTextSelected: {
-    fontWeight: 'bold',
-    color: 'blue',
-  },
 });
+
+export default HomeScreen;
