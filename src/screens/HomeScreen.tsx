@@ -1,7 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 export function HomeScreen() {
+
+
+  const [weatherData, setWeatherData] = useState<any>({});
+
+  const fetchWeatherData = async () => {
+    try {
+      const response = await fetch('http://192.168.15.37:3001/weather/Boa%20Viagem');
+      if (response.ok) {
+        const data = await response.json();
+        setWeatherData(data);
+      } else {
+        console.error('Erro ao buscar dados meteorológicos:', response.status);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados meteorológicos:', error);
+    }
+  };
+
+  useEffect(() => {
+    // Buscar dados meteorológicos inicialmente
+    fetchWeatherData();
+
+    // Atualizar dados a cada minuto
+    const interval = setInterval(fetchWeatherData, 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -9,23 +37,23 @@ export function HomeScreen() {
           Você está localizado em:
         </Text>
         <Text style={styles.location}>
-          Cidade, Estado
+          Recife, Pernembuco
         </Text>
         <Text style={styles.currentTempText}>
           Temperatura Atual
         </Text>
         <Text style={styles.currentTemp}>
-          25°C
+          {weatherData.temperature}°C
         </Text>
         <View style={styles.infoContainer}>
           <View style={styles.infoBox}>
             <Text style={styles.infoText}>
-              Umidade: 80%
+              Umidade: {weatherData.humidity}%
             </Text>
           </View>
           <View style={styles.infoBox}>
             <Text style={styles.infoText}>
-              Precipitação: 10mm
+              Precipitação: {weatherData.precipitation}mm
             </Text>
           </View>
         </View>
